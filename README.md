@@ -13,7 +13,7 @@
 ## Тарифы
 ![image](https://user-images.githubusercontent.com/109274064/178940533-34df8ee0-33b5-4c35-947a-665a0b33ef04.png)
 
-#Вход
+# Вход
 ![image](https://user-images.githubusercontent.com/109274064/178940663-31b8b199-4c79-4209-8477-ba7c63ff56d3.png)
 
 # Страницы пользователя
