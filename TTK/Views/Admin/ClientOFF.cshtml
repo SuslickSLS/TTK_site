@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@model List<TTK.Model.Client>;
+
+<link href="~/css/ButtonStyle.css" rel="stylesheet" />
+<link href="~/css/Detailed/Client.css" rel="stylesheet" />
+<div class="content">
+    <div class="Content_Title">
+        <h1 class="title">Отключенные клиенты</h1>
+    </div>
+    <div class="Clents">
+        <div class="table_function">
+            <div class="Element_function">
+                <div class="Searh_Clietn">
+                    <span>Поиск:</span><input id="search" type="search">
+                </div>
+            </div>
+           
+        </div>
+        <div class="Table_withClient">
+
+            <table class="table_client">
+                <thead>
+                    <tr>
+                        <th scope="col">ФИО</th>
+                        <th scope="col">Тариф</th>
+                        <th scope="col">Подробнее</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td scope="row">@item.Fullname</td>
+                            <td>Отключен</td>
+                            <td>
+                                <div class="Button_table">
+                                    <button class="btn_table btn1 service_button" type="button">Подробнее</button>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

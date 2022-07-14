@@ -1,0 +1,42 @@
+﻿
+.form {
+    width: 300px;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px #ccc;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+}
+
+.form_title {
+    text-align: center;
+    margin: 0 0 32px 0;
+    font-weight: normal;
+}
+
+.form_button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+    font-size: 16xp;
+    color: #fff;
+    background-color: #fc2600;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 10px 0 0 0;
+}
+
+
+.section_about_content {
+    text-align: center;
+}
+
+.section_about {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

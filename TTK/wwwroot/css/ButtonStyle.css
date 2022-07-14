@@ -1,0 +1,27 @@
+﻿.service_button {
+    box-shadow: none;
+    background: red;
+    width: 200px;
+    padding: 14px 20px;
+}
+
+    .service_button:hover {
+        background: #ff1100;
+        color: white;
+    }
+
+.btn1 {
+    background: white;
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 10px;
+    transition: all 0.3s;
+}
+
+    .btn1:hover {
+        box-shadow: 0px -5px 0 rgb(255, 255, 255) inset;
+    }
+

@@ -1,0 +1,229 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@model TTK.ViewModels.Admin.ClientInfoAdmin;
+
+<link rel="stylesheet" href="~/css/AboutUs.css" />
+<link rel="stylesheet" href="~/css/Client_Info.css" />
+<link href="~/css/ButtonStyle.css" rel="stylesheet" />
+
+@using iTextSharp.text;
+@using iTextSharp.text.pdf;
+@using System.IO;
+
+<style>
+    .Contaner_diagram {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 35px;
+    }
+
+    Tarif_diagramma {
+        width: calc(100% / 5);
+        margin-bottom: 90px;
+        padding: 0 35px;
+        position: relative;
+    }
+
+        Tarif_diagramma::before {
+            content: '';
+            background: #1d1b1b;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+
+        Tarif_diagramma:nth-of-type(2n+1)::before {
+            content: none;
+        }
+</style>
+@functions{
+    public void ConverPDF(int but)
+    {
+        
+        iTextSharp.text.Document doc = new iTextSharp.text.Document();
+
+        //Создаем объект записи пдф-документа в файл
+        PdfWriter.GetInstance(doc, new FileStream("pdfTables.pdf", FileMode.Create));
+
+        //Открываем документ
+        doc.Open();
+
+        BaseFont baseFont = BaseFont.CreateFont(@"C:\Windows\Fonts\arial.ttf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+        iTextSharp.text.Font font = new iTextSharp.text.Font(baseFont, iTextSharp.text.Font.DEFAULTSIZE, iTextSharp.text.Font.NORMAL);
+        PdfPTable pdf = new PdfPTable(1);
+        PdfPCell cell = new PdfPCell(new Phrase("Получилось!!!", font));
+        pdf.AddCell(cell);
+        doc.Add(pdf);
+
+        doc.Close();
+        string a = "Pdf-документ сохранен";
+    }
+}
+
+<div class="content" style="overflow: scroll;">
+    <div class="ClientInfo">
+
+        <section class="section_info">
+            <div class="Clinent_Info" style=" margin:0px;">
+
+                <div class="Personal_InfoClinet">
+                    <div class="section_FullName">
+                        <a style="color:white; font-size:20px;" class="a_FullName">ФИО</a>
+                        <h3 style=" font-size:30px;"  class="Client_FullName">@Model.Client.Fullname</h3>
+                    </div>
+                    <div class="section_FullName">
+                        <a style="color: white; font-size: 20px;" class="a_FullName">Дата рождения</a>
+                        <h3 style=" font-size:30px;" class="Client_FullName">@Model.Client.Birthday.ToString("D")</h3>
+                    </div>
+                    <div class="section_FullName">
+                        <a style="color: white; font-size: 20px;" class="a_FullName">Баланс</a>
+                        <h3 style=" font-size:30px;" class="Client_FullName">@Model.Client.Balance</h3>
+                    </div>
+                    <div class="section_Phone">
+                        <a style="color: white; font-size: 20px;" class="a_FullName">Телефон</a>
+                        <div class="Phone_info">
+                            <span class="Phone_Status">
+                                <a  style=" font-size:30px;" class="Client_FullName">@Model.Client.Phone</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="Contract_client">
+            <h1 class="Contract_Title">Контракты</h1>
+
+            @for (int i = 0; i < Model.Contract.Count; i++)
+            {
+                <section style="color:white;" class="section_info">
+                    <div class="Clinent_Info" style="margin: 0px;">
+
+                        <div class="Personal_InfoClinet">
+                            <div class="section_HomeRegion">
+                                <a class="a_FullName">Адрес подключения</a>
+                                <h3 class="Client_FullName">
+                                    @Model.Contract[i].AddressConnection
+                                </h3>
+                            </div>
+                            <div class="section_Phone">
+                                <a class="a_FullName">Статус</a>
+                                <div class="Phone_info">
+                                    <span class="Phone_Status">
+                                        @if (Model.Contract[i].Status)
+                                        {
+                                            <a class="status active">Договор Активен</a>
+                                        }
+                                        else
+                                        {
+                                            <a class="status">Договор Неактивен</a>
+                                        }
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Account_ClientInfo">
+                            <div class="Info_Account">
+                                <p class="p_Personal_Account">Лицевой счет: @Model.Client.ClientId</p>
+                                <p class="p_Contract">№ договораx: @Model.Contract[i].ContractNumber</p>
+                                <p class="p_Connection_Date">Дата заключения: @(((DateTime)Model.Contract[i].Date).ToString("D"))</p>
+                            </div>
+                            @*<button class="btn" type="button">Расторгнуть договор</button>*@
+                        </div>
+
+                        <div class="Contaner_diagram">
+                            @for (int j = 0; j < Model.tariffs[i].TariffDataTariffs.Count; j++)
+                            {
+                                <div class="Tarif_diagramma" style="margin:5px;">
+                                    <div id="chart_div @Model.Contract[i].ContractId @j" style="width: 200px; height: 200px;"></div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn1 service_button" @*style="width:200px; height:50px"*@ type="button"  onclick="window.location.href = '@Url.Action("UseTariff", "Admin", new { id = Model.Contract[i].ContractId} @*new { id = Model.client[i].ClientId }*@)'" >Просмотр трат</button>
+                    </div>
+                </section>
+            }
+        </section>
+
+
+    </div>
+
+
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    @foreach (var item in Model.Contract)
+    {
+        <script type="text/javascript">
+
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(LoadData);
+
+            function LoadData() {
+                $(function () {
+                    $.ajax({
+                        type: "GET",
+                        url: '/Admin/GetDrawUseResuorse/@item.ContractId',
+                        /*dataType: "json",*/
+                        success: function (chartsdata) {
+
+                            var Data = chartsdata.jsonList;
+                            for (var i = 0; i < Data.length; i++) {
+
+
+
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', Data[i].component_name);
+                                data.addColumn('number', 'Count');
+
+                                data.addRow(['', Data[i].component_count]);
+                                data.addRow(['', Data[i].count_use]);
+
+                                var id = 'chart_div ' + @item.ContractId +' '+ i
+                                var chart = new google.visualization.PieChart(document.getElementById(id));
+                                chart.draw(data, {
+                                    titleTextStyle: {
+                                        color: 'red',
+                                        fontName: 'TimesNewRoman',
+                                        fontSize: 20
+                                    },
+                                    legend: 'none',
+                                    title: Data[i].component_name,
+                                    position: "top",
+                                    fontsize: 20,
+                                    backgroundColor: 'transparent',
+                                    pieSliceTextStyle: {
+                                        color:'black'
+                                    },
+                                    pieSliceBorderColor:'black',
+                                    //backgroundColor: {
+                                    //    stroke: '#FDF5E6',
+                                    //    strokeWidth: 10
+                                    //},
+                                    colors: ['white', 'red', '#800080', '#800080', '#FFA500']
+
+                                });
+                            }
+
+
+                        },
+                        error: function () {
+                            alert('Error loading data')
+                        }
+                    })
+                });
+
+
+            }
+
+        </script>
+    }
+}

@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model TTK.ViewModels.ClientEquipment;
+
+
+<link rel="stylesheet" href="~/css/Client.css">
+<link rel="stylesheet" href="~/css/Equipment.css">
+
+<div class="sidebar">
+    <a class="active" asp-controller="User" asp-action="Index" asp-route-ContractNumber="@User.Identity.Name">Абонент и номер</a>
+    <a asp-controller="User" asp-action="UserEquipment">Подключенные услуги</a>
+    <a asp-controller="User" asp-action="UseContent">Использованный тариф</a>
+    <a asp-controller="User" asp-action="UserHistory">История</a>
+</div>
+
+<div class="content">
+    <h1 class="Title">Подключенные услуги</h1>
+    <asp:Chart ID="Chart1" runat="server">
+        <ChartAreas>
+            <asp:ChartArea Name="ChartArea1" />
+        </ChartAreas>
+    </asp:Chart>
+    <section>
+        <div class="Content_Service">
+            @foreach (var equipment in Model.equipment)
+            {
+                <div class="Service_Item">
+                    <div class="Service">
+                        <div class="Service_Info">
+                            <h3 class="Service_Title">@equipment.Name</h3>
+                            @*<p class="Service_Description">@equipment.Discription</p>*@
+                        </div>
+                        <div class="Service_Price">
+                            <div class="Price">
+                                <span class="servic_price_value">
+                                    @equipment.Price
+                                </span>
+                                <span class="Service_Price_Unit">&#8381;/мес.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </section>
+</div>
+
+

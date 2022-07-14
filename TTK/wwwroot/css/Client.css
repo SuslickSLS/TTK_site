@@ -1,0 +1,30 @@
+﻿/*About_Client */
+.header-page {
+    position: relative;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 300px;
+    overflow: auto;
+}
+
+
+    .sidebar a {
+        display: block;
+        color: black;
+        padding: 16px;
+        text-decoration: none;
+    }
+
+
+
+
+div.content {
+    margin-left: 200px;
+    padding: 1px 50px;
+}

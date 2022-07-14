@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model TTK.ViewModels.Detail.Tariff
+
+
+    <div class="content" style="color:red;" >
+        <div>
+            <h1 style="color:red;">Добавить тариф</h1>
+        </div>
+        <form method="post" controller="Home" enctype="multipart/form-data">
+            <table>
+                <tr style="color: white;">
+                    <td><p>Название</p></td>
+                    <td><input asp-for="Name" type="text" name="Name" /></td>
+                </tr>
+                <tr style="color:white;">
+                    <td><p>Цена</p></td>
+                    <td>
+                        <input asp-for="price" type="text" name="price" />
+                    </td>
+                </tr>
+                <tr style="color: white;">
+                    <td><p>ГБ</p></td>
+                    <td>
+                        <input asp-for="component[0]" type="number" name="component[0]" value="0" />
+                    </td>
+                </tr>
+                <tr style="color: white;">
+                    <td><p>Мин</p></td>
+                    <td>
+                        <input asp-for="component[1]" type="number" name="component[1]"  value="0"/>
+                    </td>
+                </tr>
+                <tr style="color: white;">
+                    <td><p>СМС</p></td>
+                    <td>
+                        <input asp-for="component[2]" type="number" name="component[2]" value="0" />
+                    </td>
+                </tr>
+                <tr style="color: white;">
+                    <td><p>Домашний интернет</p></td>
+                    <td>
+                        <input asp-for="component[3]" type="number" name="component[3]" value="0"/>
+                    </td>
+                </tr>
+                <tr style="color: white;">
+                    <td><p>Телевидение</p></td>
+                    <td>
+                        <input asp-for="component[4]" type="number" name="component[4]" value="0" />
+                    </td>
+                </tr>
+                <tr style="color: white;">
+                    <td><input type="submit" value="Отправить" /> </td>
+                    <td> <div asp-validation-summary="All"></div></td>
+                </tr>
+            </table>
+        </form>
+
+    </div>

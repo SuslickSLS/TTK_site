@@ -1,0 +1,101 @@
+﻿
+@{
+}
+@model TTK.ViewModels.Client_Info;
+
+<link rel="stylesheet" href="~/css/AboutUs.css" />
+<link rel="stylesheet" href="~/css/Client.css" />
+<link rel="stylesheet" href="~/css/Client_Info.css" />
+<link href="~/css/ButtonStyle.css" rel="stylesheet" />
+
+<div class="sidebar">
+    <a class="active" asp-controller="User" asp-action="Index" asp-route-ContractNumber="@User.Identity.Name">Абонент и номер</a>
+    <a asp-controller="User" asp-action="UserEquipment">Подключенные услуги</a>
+    <a asp-controller="User" asp-action="UseContent">Использованный тариф</a>
+    <a asp-controller="User" asp-action="UserHistory">История</a>
+</div>
+
+<div class="content">
+    <h2 class="Title">
+        Абонент и номер
+    </h2>
+    <div class="ClientInfo">
+
+        <section class="section_info">
+            <div class="Clinent_Info">
+
+                <div class="Personal_InfoClinet">
+                    <div class="section_FullName">
+                        <a class="a_FullName">ФИО</a>
+                        <h3 class="Client_FullName">@Model.UserName</h3>
+                    </div>
+                    <div class="section_HomeRegion">
+                        <a class="a_FullName">Домашний адресс</a>
+                        <h3 class="Client_FullName">
+                            @Model.contract.AddressConnection;
+                        </h3>
+                    </div>
+                    <div class="section_Phone">
+                        <a class="a_FullName">Телефон</a>
+                        <div class="Phone_info">
+                            <span class="Phone_Status">
+                                <a class="Client_FullName">@Model.Phone</a>
+                                @if (Model.contract.Status)
+                                {
+                                    <a class="status active">Активен</a>
+                                }
+                                else
+                                {
+                                    <a class="status">Неактивен</a>
+                                }
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="Account_ClientInfo">
+                    <div class="Info_Account">
+                        <p class="p_Personal_Account">Лицевой счет: @Model.ClientId </p>
+                        <p class="p_Contract">№ договораx: @Model.contract.ContractNumber</p>
+                        <p class="p_Connection_Date">Дата заключения: @Model.date </p>
+                    </div>
+                    @if (Model.contract.Status)
+                    {
+
+                        <button class="btn1 service_button" type="button" onclick="window.location.href = '@Url.Action("StatusUpdate", "User",new {id= Model.contract.ContractId})'">Расторгнуть договор</button>
+                    }
+                   
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+    <section class="Info_Tarrif">
+        <div class="Tarif">
+            <a class="Title_Tarif">Текущий тариф</a>
+
+            <h3 class="a_TarifName">
+                @Model.tariffName
+            </h3>
+
+            <div class="Button_Tarif">
+                <button class="btn1 service_button" type="button" onclick="window.location.href = '@Url.Action("Index", "Home")'">Смена тарифа</button>
+            </div>
+        </div>
+
+        <div class="Balance">
+            <a class="Title_Balance">Баланс на @Model.date </a>
+            <h3 class="Balance_Client">
+                @Model.Balance
+            </h3>
+
+            <div class="Button_Balance">
+                <button class="btn1 service_button" type="button">Пополнить</button>
+            </div>
+        </div>
+    </section>
+    <div>
+        <button class="btn1 service_button" asp-controller="Home" asp-action="Logout"  onclick="window.location.href = '@Url.Action("Logout", "Home")'" type="button">Выйти</button>
+    </div>
+</div>

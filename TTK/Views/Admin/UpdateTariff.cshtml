@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model TTK.ViewModels.Detail.TariffUpdate
+
+<div class="content" >
+    <div>
+        <h1 style="color:red;">Изменить тариф</h1>
+    </div>
+    <form method="post" action="UpdateTariff" controller="Admin" enctype="multipart/form-data">
+        <input type="hidden" asp-route-ItemId="id" value="@Model.id" name="id" />
+        <table>
+            <tr  style="color: white;">
+                <td><p>Название</p></td>
+                <td><input asp-route-Name="Name" type="text" name="Name" value="@Model.Name" /></td>
+            </tr>
+            <tr  style="color: white;">
+                <td><p>Цена</p></td>
+                <td>
+                    <input asp-asp-route-Namefor="price" type="text" name="price" value="@Model.price" />
+                </td>
+            </tr>
+            <tr  style="color: white;">
+                <td><p>ГБ</p></td>
+                <td>
+                    <input asp-route-Name="component[0]" type="number" name="component[0]" value="@Model.component[0]" />
+                </td>
+            </tr>
+            <tr style="color: white;">
+                <td><p>Мин</p></td>
+                <td>
+                    <input asp-route-Name="component[1]" type="number" name="component[1]" value="@Model.component[1]" />
+                </td>
+            </tr>
+            <tr style="color: white;">
+                <td><p>СМС</p></td>
+                <td>
+                    <input asp-route-Name="component[2]" type="number" name="component[2]" value="@Model.component[2]" />
+                </td>
+            </tr>
+            <tr style="color: white;">
+                <td><p>Домашний интернет</p></td>
+                <td>
+                    <input asp-route-Name="component[3]" type="number" name="component[3]" value="@Model.component[3]" />
+                </td>
+            </tr>
+            <tr style="color: white;">
+                <td><p>Телевидение</p></td>
+                <td>
+                    <input asp-route-Name="component[4]" type="number" name="component[4]" value="@Model.component[4]" />
+                </td>
+            </tr>
+
+            <tr style="color: white;">
+                <td><input type="submit" value="Отправить" /> </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</div>

@@ -1,0 +1,50 @@
+﻿@model TTK.ViewModels.Detail.AddClient
+
+    <link rel="stylesheet" href="~/css/AboutUs.css" />
+
+    <div class="content">
+        <div class="Title_Content">
+            <h1>Подключение</h1>
+        </div>
+        <form method="post" controller="Home" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td><p>ФИО</p></td>
+                    <td><input asp-for="FIO" type="text" name="FIO" /></td>
+                </tr>
+                <tr>
+                    <td><p>Дата</p></td>
+                    <td>
+                        <input asp-for="date" type="date" name="date" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><p>Паспорт</p></td>
+                    <td>
+                        <input asp-for="passport" type="text" name="passport" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><p>Телефон</p></td>
+                    <td>
+                        <input asp-for="phone" type="text" name="phone" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><p>Пароль</p></td>
+                    <td>
+                        <input asp-for="password" type="password" name="password" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Отправить" /> </td>
+                    <td> <div asp-validation-summary="All"></div></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+ @section Scripts {
+   @{
+          await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+ }

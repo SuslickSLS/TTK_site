@@ -1,0 +1,180 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@model TTK.ViewModels.Admin.DetailController;
+<style>
+    .content {
+        width: calc(100% - 78px);
+        overflow: auto;
+    }
+
+    .component {
+        width: calc(100%/3);
+    }
+
+    .Components_tarif {
+        display: flex;
+        flex-wrap: wrap;
+        color:white;
+    }
+    g{
+        color:white;
+    }
+    
+</style>
+
+<link href="~/css/ButtonStyle.css" rel="stylesheet" />
+
+<link href="~/css/Detailed/Client.css" rel="stylesheet" />
+<div class="content">
+    <!-- Title -->
+    <div class="Title_Pa">
+        <h1>@Model.tariff.Name</h1>
+    </div>
+    <div id="Tarif_diagaramma" class="diagramma" style="width: 1000px; height: 500px;"></div>
+    @*<section class="Section_ComponetTarif">
+        <div class="Title_Section">
+            <h2>Компоненты тарифа</h2>
+        </div>
+        <div class="Components_tarif">
+            <div class="component">
+                <h3>ГБ</h3>
+                <p class="">30 из 30 Гб</p>
+            </div>
+            <div class="component">
+                <h3>СМС</h3>
+                <p class="">14 из 50 СМС</p>
+            </div>
+            <div class="component">
+                <h3>Мин</h3>
+                <p class="">200 из 250 мин</p>
+            </div>
+        </div>
+    </section>*@
+    <section class="Section_Client">
+        <div class="Title_Section">
+            <h2>Подключенные клиенты</h2>
+        </div>
+        <div class="Clents">
+            <div class="Table_withClient">
+
+                <table class="table_client">
+                    <thead>
+                        <tr>
+                            <th scope="col">ФИО</th>
+                            <th scope="col">Тариф</th>
+                            <th scope="col">Подробнее</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.users.Count; i++)
+                        {
+                            <tr>
+                                <td scope="row">@Model.client[i].Fullname</td>
+                                <td>@Model.tariff.Name</td>
+                                <td>
+                                    <div class="Button_table">
+                                        <button class="btn_table btn1 service_button" type="button" onclick="window.location.href = '@Url.Action("ClientInfo", "Admin", new { id = Model.client[i].ClientId} @*new { id = Model.client[i].ClientId }*@)'">Подробнее</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(LoadData);
+
+        function LoadData() {
+            $(function () {
+                $.ajax({
+
+                    type: "GET",
+                    url: '/Admin/GetDrawTotalMouth/@Model.tariff.TariffId',
+                    /*dataType: "json",*/
+                    success: function (chartsdata) {
+                        var Data = chartsdata.jsonList;
+
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Date');
+                        data.addColumn('number', 'Количество подключенных');
+
+                        for (var i = 0; i < Data.length; i++) {
+
+                            data.addRow([Data[i].date, Data[i].count]);
+                        }
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('Tarif_diagaramma'));
+
+                        chart.draw(data, {
+                            legend: {
+                                textStyle: {
+                                    color: 'white'
+                                }
+                            },
+                            title: 'Количесво подключенных',
+                            titleTextStyle: {
+                                color: 'white',
+                                fontSize: 30
+                            },
+                            hAxis: {
+                                title: 'Месяц',
+                                titleTextStyle: {
+                                    color: 'white',
+                                },
+                                gridlines: {
+                                    color: 'white'
+                                },
+                                textStyle: {
+                                    color: 'white'
+                                }
+                            },
+                           
+                            vAxis: {
+                                title: 'чел.',
+                                titleTextStyle: {
+                                    color: 'white',
+                                },
+                                gridlines: {
+                                    color: 'white'
+                                },
+                                textStyle: {
+                                    color:'white'
+                                }
+
+                            },
+                            
+                            fontsize: 20,
+                            backgroundColor: 'transparent',
+                            colors: ['red', '#800000', '#00FF00', '#800080', '#FFA500']
+
+
+                        });
+
+                    },
+                    error: function () {
+                        alert('Error loading data')
+                    }
+                })
+            });
+
+
+        }
+
+    </script>
+}

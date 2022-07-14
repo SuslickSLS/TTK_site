@@ -1,0 +1,112 @@
+﻿<style>
+    img.background {
+        min-height: 100%;
+        min-width: 640px;
+        width: 100%;
+        height: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    .content{
+        color:red;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TTK</title>
+    <link rel="stylesheet" href="~/css/normalize.css" runat="server" />
+    <link href="~/css/SideBarManager.css" rel="stylesheet" />
+    <link href="~/css/History.css" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    @*<link rel="stylesheet" href="~/css/site.css" runat="server" />
+        <link rel="stylesheet" href="~/css/Snow.css" runat="server" />*@
+</head>
+
+
+
+
+
+<body>
+    <img src="/Img/BG_Admin.png" class="background" />
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div class="logo_name">
+                    <H1 class="logo">ТТК</H1>
+                </div>
+            </div>
+            <i class='bx bx-menu btn' id="btn"></i>
+        </div>
+
+        <ul class="nav_list">
+            <li>
+                <a asp-action="Index" asp-controller="Admin">
+                    <i class='bx bxs-bar-chart-alt-2'></i>
+                    <span class="links_name">Статистика</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Clients" asp-controller="Admin">
+                    <i class='bx bxs-user-pin'></i>
+                    <span class="links_name">Клиенты</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="AddTariff" asp-controller="Admin">
+                    <i class='bx bxs-user-pin'></i>
+                    <span class="links_name">Тариф</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="ClientOFF" asp-controller="Admin">
+                    <i class='bx bxs-user-pin'></i>
+                    <span class="links_name">Отключенные</span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Game" asp-controller="Admin">
+                    <i class='bx bxs-joystick'></i>
+                    <span class="links_name">Игра</span>
+                </a>
+
+            </li>
+        </ul>
+
+    </div>
+
+    @RenderBody()
+    @RenderSection("Scripts", required: false)
+
+
+    <div id="snowflakeContainer">
+        <span class="snowflake"></span>
+    </div>
+    <script src="~/js/SideBar.js"></script>
+    <script src="~/js/Snow.js" type="text/javascript"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+    <script>
+        let btn = document.querySelector("#Btn");
+        let menu = document.querySelector(".Left_Menu");
+
+        let BtnClose = document.querySelector(".Btn_close");
+
+        btn.onclick = function () {
+            menu.classList.toggle("active");
+
+        }
+
+        BtnClose.onclick = function () {
+            menu.classList.remove("active");
+
+        }
+    </script>
+
+</body>
+</html>

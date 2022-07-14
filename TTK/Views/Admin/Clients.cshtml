@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@model TTK.ViewModels.Admin.ClientsController;
+
+<link href="~/css/ButtonStyle.css" rel="stylesheet" />
+<link href="~/css/Detailed/Client.css" rel="stylesheet" />
+    <div class="content">
+        <div class="Content_Title">
+            <h1 class="title">Клиенты</h1>
+        </div>
+        <div class="Clents">
+            <div class="table_function">
+                <div class="Element_function">
+                    <div class="Searh_Clietn">
+                        <span>Поиск:</span><input id="search" type="search">
+                    </div>
+                </div>
+                @*<div class="Element_function">
+
+                    <div class="Filter_Client_Taarif">
+                        <span>Поиск:</span><select>
+                            @foreach (var item in Model.tariff)
+                            {
+                                <option>@item.Name</option>
+                            }
+
+                        </select>
+                    </div>
+                </div>*@
+            </div>
+            <div class="Table_withClient">
+
+                <table class="table_client">
+                    <thead>
+                        <tr>
+                            <th scope="col">ФИО</th>
+                            <th scope="col">Тариф</th>
+                            <th scope="col">Подробнее</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.clients.Where(x=>x.Status == true).ToList())
+                        {
+                            <tr>
+                                <td scope="row">@item.Fullname</td>
+                                <td>@item.Status</td>
+                                <td>
+                                    <div class="Button_table">
+                                        <button class="btn_table btn1 service_button" type="button" onclick="window.location.href = '@Url.Action("ClientInfo", "Admin", new { id = item.ClientId} )'">Подробнее</button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

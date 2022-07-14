@@ -1,0 +1,57 @@
+﻿
+@{
+}
+@model TTK.ViewModels.ClientHistory;
+
+
+
+
+    <link rel="stylesheet" href="~/css/Client.css">
+    @*<link rel="stylesheet" href="~/css/History.css">*@
+
+<style>
+    .Center {
+        text-align: center;
+    }
+</style>
+<div class="sidebar">
+    <a class="active" asp-controller="User" asp-action="Index" asp-route-ContractNumber="@User.Identity.Name">Абонент и номер</a>
+    <a asp-controller="User" asp-action="UserEquipment">Подключенные услуги</a>
+    <a asp-controller="User" asp-action="UseContent">Использованный тариф</a>
+    <a asp-controller="User" asp-action="UserHistory">История</a>
+</div>
+
+    <div class="content">
+        <h1 class="Title">История</h1>
+
+
+        <div class="tabs">
+            <div id="content-1">
+                <div class="Table_History">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Название тарифа</th>
+                                <th scope="col">Дата</th>
+                                <th scope="col">Компонент</th>
+                                <th scope="col">Количество</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var history in Model.historyTraffic)
+                            {
+                                <tr>
+                                    <th class="Center" scope="col">@Model.tariffName</th>
+                                    <td class="Center" width="200px" scope="col">@history.Date.ToString("d")</td>
+                                    <td class="Center" width="50px" scope="col">@Model.dataTariff.Where(x=>x.IdDataTariff == history.DataTariff).First().DataTariffName</td>
+                                    <td class="Center" width="150px" scope="col">@history.Count</td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

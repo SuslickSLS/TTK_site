@@ -1,0 +1,84 @@
+﻿.Clinent_Info {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -35px;
+}
+
+.Personal_InfoClinet {
+    width: 60%;
+    margin-bottom: 90px;
+    padding: 0 35px;
+    position: relative;
+}
+
+.Account_ClientInfo::before {
+    content: '';
+    background: #1d1b1b;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    transform: translateX(-50%);
+}
+
+.Account_ClientInfo {
+    width: 40%;
+    margin-bottom: 90px;
+    padding: 0 35px;
+    position: relative;
+}
+
+
+.status.active:before {
+    background-color: #7cb518;
+}
+
+.status:before { /*неактивен*/
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #ee443a;
+    display: inline-block;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.status {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #000;
+    margin-left: 25px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.Info_Tarrif {
+    border: 2px solid rgb(248, 2, 2);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Tarif {
+    width: 50%;
+    padding: 0 35px;
+    position: relative;
+}
+
+.Balance::before {
+    content: '';
+    background: #1a1919;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    transform: translateX(-50%);
+}
+
+.Balance {
+    width: 50%;
+    padding: 0 35px;
+    position: relative;
+}
