@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    @model TTK.ViewModels.LoginViewModels;
+}
+
+<link rel="stylesheet" href="~/css/AboutUs.css" />
+<link rel="stylesheet" href="~/css/Login.css" />
+
+<section class=" section section_about">
+    <div class="section_about_content">
+        <form class="form" asp-action="Login" asp-controller="Home" asp-anti-forgery="true">
+            <div>
+                <h1 class="form_title">Вход</h1>
+                <div>
+                    <input asp-for="UserName" placeholder="Ваш логин" />
+                </div>
+                <div>
+                    <input placeholder="Ваш пароль" asp-for="Password" />
+                </div>
+                <div>
+                    <input class="form_button" type="submit" value="ОК" />
+                </div>
+                <div asp-validation-summary="All"></div>
+            </div>
+        </form>
+    </div>
+</section>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

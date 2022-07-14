@@ -1,0 +1,45 @@
+﻿.section_about {
+    background: white;
+    color: black;
+    position: relative;
+}
+
+
+.img_about {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    /*object-fit: cover;*/
+}
+
+.container {
+    position: relative;
+}
+
+.section_about_container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.section_about_content {
+    width: 50%;
+    padding-left: 100px;
+}
+
+.header-page {
+    position: relative;
+}
+
+@media (max-width: 1200px) {
+    .img_about {
+        display: none;
+    }
+
+    .section_about_content {
+        width: 100%;
+        padding-left: 0px;
+        height: 100%;
+    }
+}

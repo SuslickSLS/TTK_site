@@ -1,0 +1,97 @@
+﻿
+@model (List<TTK.Model.Tariff>, List<TTK.Model.Equipment>, TTK.ViewModels.Detail.AddClient)
+
+
+
+<section class="selection-top">
+    <div class="container selection-top_container">
+        <a class="selection-top_info">ТрансТелеКом</a>
+        <h1 class="selection-top_title">ТТК</h1>
+    </div>
+</section>
+
+
+<section class="section section-Services">
+    <div class="container">
+        <header class="section">
+            <h2 class="section_title_Service">Тарифы</h2>
+        </header>
+
+        <div class="catalog">
+            @foreach (var tariff in Model.Item1)
+            {
+                <div class="catalog_item">
+                    <div class="service service_catalog">
+                        <div class="service_content">
+                            <h3 class="service_title">@tariff.Name</h3>
+
+                            <ul>
+                                @foreach (var data in tariff.TariffDataTariffs)
+                                {
+
+                                    <li>
+                                        <div class="Description">
+                                            <p>@data.Count : @data.IdDataTariffNavigation.DataTariffName</p>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <foter class="service_footer">
+                            <div class="service_bottom">
+                                <div class="service_price">
+                                    <span class="servic_price_value">@tariff.Price</span>
+                                    <span class="service_currency">&#8381;</span>
+                                </div>
+                                @if (!User.Identity.IsAuthenticated)
+                                {
+                                    <button class="btn1 service_button" id="Btn_addClient" type="button" onclick="window.location.href = '@Url.Action("addClient", "Home")'">Подключение</button>
+                                }
+                                else
+                                {
+                                     <button class="btn1 service_button" id="Btn_addClient" type="button" onclick="window.location.href = '@Url.Action("UpdateTariff", "Home", new { id = User.Identity.Name, id_tariff = tariff.TariffId})'">Сменить тариф</button>
+                                }
+                            </div>
+                        </foter>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+    
+
+    <div class="container">
+        <header class="section">
+            <h2 class="section_title_Service">Маршрутизаторы</h2>
+        </header>
+
+        <div class="catalog">
+
+            @foreach (var equipment in Model.Item2)
+            {
+                <div class="catalog_item">
+
+
+                    <div class="service service_catalog">
+                        <div class="service_content">
+                            <h3 class="service_title">@equipment.Name</h3>
+                            <p class="service_description">@equipment.Discription</p>
+
+                        </div>
+                        <foter class="service_footer">
+                            <div class="service_bottom">
+                                <div class="service_price">
+                                    <span class="servic_price_value">@equipment.Price</span>
+                                    <span class="service_currency">&#8381;</span>
+                                </div>
+                            </div>
+                        </foter>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+

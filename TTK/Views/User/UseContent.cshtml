@@ -1,0 +1,126 @@
+﻿
+@model TTK.ViewModels.UseContent
+<link rel="stylesheet" href="~/css/AboutUs.css" />
+<link rel="stylesheet" href="~/css/Client.css" />
+<link rel="stylesheet" href="~/css/Client_Info.css" />
+
+<style>
+    .Contaner_diagram {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 35px;
+    }
+
+    Tarif_diagramma {
+        width: calc(100% / 5);
+        margin-bottom: 90px;
+        padding: 0 35px;
+        position: relative;
+    }
+
+        Tarif_diagramma::before {
+            content: '';
+            background: #1d1b1b;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            transform: translateX(-50%);
+        }
+
+        Tarif_diagramma:nth-of-type(2n+1)::before {
+            content: none;
+        }
+</style>
+
+<div class="sidebar">
+    <a class="active" asp-controller="User" asp-action="Index" asp-route-ContractNumber="@User.Identity.Name">Абонент и номер</a>
+    <a asp-controller="User" asp-action="UserEquipment">Подключенные услуги</a>
+    <a asp-controller="User" asp-action="UseContent">Использованный тариф</a>
+    <a asp-controller="User" asp-action="UserHistory">История</a>
+</div>
+
+
+<div class="content">
+    <h2 class="Title">
+        Использованный трафик
+    </h2>
+    <div class="Contaner_diagram">
+        @for (int j = 0; j < Model.componets; j++)
+        {
+            <div class="Tarif_diagramma" style="margin:5px;">
+                <div id="chart_div @j" style="width: 250px; height: 250px;"></div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    @for (int j = 0; j < Model.componets; j++)
+    {
+
+
+        <script type="text/javascript">
+
+            google.charts.load('current', { 'packages': ['corechart'] });
+            google.charts.setOnLoadCallback(LoadData);
+
+            function LoadData() {
+                $(function () {
+                    $.ajax({
+                        type: "GET",
+                        url: '/Admin/GetDrawUseResuorse/@Model.contract.ContractId',
+                        /*dataType: "json",*/
+                        success: function (chartsdata) {
+
+                            var Data = chartsdata.jsonList;
+                            for (var i = 0; i < Data.length; i++) {
+
+
+
+                                var data = new google.visualization.DataTable();
+                                data.addColumn('string', Data[i].component_name);
+                                data.addColumn('number', 'Count');
+
+                                data.addRow(['', Data[i].component_count]);
+                                data.addRow(['', Data[i].count_use]);
+
+                                var id = 'chart_div ' + i;
+                                var chart = new google.visualization.PieChart(document.getElementById(id));
+                                chart.draw(data, {
+                                    titleTextStyle: {
+                                        color: 'red',
+                                        fontName: 'TimesNewRoman',
+                                        fontSize: 20
+                                    },
+                                    legend: 'none',
+                                    title: Data[i].component_name,
+                                    position: "top",
+                                    fontsize: "40px",
+                                    backgroundColor: 'transparent',
+                                    pieSliceTextStyle: {
+                                        color: 'black'
+                                    },
+                                    pieSliceBorderColor: 'black',
+                                    colors: ['white', 'red', '#00FF00', '#800080', '#FFA500']
+
+                                });
+                            }
+
+
+                        },
+                        error: function () {
+                            alert('Error loading data')
+                        }
+                    })
+                });
+
+
+            }
+
+        </script>
+    }
+}
