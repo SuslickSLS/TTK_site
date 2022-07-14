@@ -1,6 +1,7 @@
 # TTK_site - Курсовая работа
 
-##[Разделительная черта] Главное меню
+```
+## Главное меню
 ![image](https://user-images.githubusercontent.com/109274064/178940260-c5585d99-a49a-433c-bb03-282cf96f0923.png)
 
 ## Все тарифы
@@ -8,12 +9,12 @@
 
 ## Вход
 ![image](https://user-images.githubusercontent.com/109274064/178940663-31b8b199-4c79-4209-8477-ba7c63ff56d3.png)
-
+```
 # Страницы пользователя
-## Страница "Абонент и номер"
+> ## Страница "Абонент и номер"
 ![image](https://user-images.githubusercontent.com/109274064/178940848-f8a246a8-a242-499e-b625-0db6a89d1bff.png)
 
-##Страница "Использованый тариф"
+> ##Страница "Использованый тариф"
 ![image](https://user-images.githubusercontent.com/109274064/178941039-adb0eb64-abb6-492c-ba2a-feaf2cb00431.png)
 
 #Страницы администратора
