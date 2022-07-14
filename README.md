@@ -14,17 +14,17 @@
 > ## Страница "Абонент и номер"
 ![image](https://user-images.githubusercontent.com/109274064/178940848-f8a246a8-a242-499e-b625-0db6a89d1bff.png)
 
-> ##Страница "Использованый тариф"
+> ## Страница "Использованый тариф"
 ![image](https://user-images.githubusercontent.com/109274064/178941039-adb0eb64-abb6-492c-ba2a-feaf2cb00431.png)
 
-#Страницы администратора
+# Страницы администратора
 
-##Страница "Статистика"
+## Страница "Статистика"
 ![image](https://user-images.githubusercontent.com/109274064/178941446-26867e1a-7525-41bf-826f-b3f3e17e6e95.png)
 
-##Страница "Подробнее о тарифе"
+## Страница "Подробнее о тарифе"
 ![image](https://user-images.githubusercontent.com/109274064/178941797-452e205e-dff3-4418-add8-18b61da8df2b.png)
 
-##Страница "Подробнее о пользователе"
+## Страница "Подробнее о пользователе"
 ![image](https://user-images.githubusercontent.com/109274064/178942312-910fae45-f114-4df4-bf4f-1f1ab91fb869.png)
 
